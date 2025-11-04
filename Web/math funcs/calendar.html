@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calendar Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            width: 14%;
+            height: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            cursor: pointer;
+        }
+        td:hover {
+            background-color: #f0f0f0;
+        }
+        input, button {
+            padding: 8px;
+            font-size: 1rem;
+            margin: 10px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Generate Calendar for a Month</h1>
+<input type="number" id="yearInput" placeholder="Enter Year (e.g., 2024)" min="1900" />
+<input type="number" id="monthInput" placeholder="Enter Month (1-12)" min="1" max="12" />
+<button onclick="generateCalendar()">Generate Calendar</button>
+
+<div id="calendar"></div>
+
+<script>
+    function generateCalendar() 
+    {
+        const year = parseInt(document.getElementById('yearInput').value);
+        const month = parseInt(document.getElementById('monthInput').value);
+
+        if (isNaN(year) || year < 1900) 
+        {
+            alert("Please enter a valid year (greater than or equal to 1900).");
+            return;
+        }
+        if (isNaN(month) || month < 1 || month > 12)
+         {
+            alert("Please enter a valid month (1-12).");
+            return;
+        }
+
+        const firstDay = new Date(year, month - 1, 1).getDay();
+        const daysInMonth = new Date(year, month, 0).getDate();
+        const adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1;
+        const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        let calendarHTML = "<table><tr>";
+        daysOfWeek.forEach(day => {
+            calendarHTML += `<th>${day}</th>`;
+        });
+        calendarHTML += "</tr><tr>";
+        for (let i = 0; i < adjustedFirstDay; i++)
+         {
+            calendarHTML += "<td></td>";
+        }
+        for (let day = 1; day <= daysInMonth; day++)
+         {
+            calendarHTML += `<td>${day}</td>`;
+            if ((adjustedFirstDay + day) % 7 === 0) {
+                calendarHTML += "</tr><tr>";
+            }
+        }
+        const remainingCells = 7 - (adjustedFirstDay + daysInMonth) % 7;
+        for (let i = 0; i < remainingCells && remainingCells < 7; i++)
+         {
+            calendarHTML += "<td></td>";
+        }
+
+        calendarHTML += "</tr></table>";
+        document.getElementById('calendar').innerHTML = calendarHTML;
+    }
+</script>
+
+</body>
+</html>

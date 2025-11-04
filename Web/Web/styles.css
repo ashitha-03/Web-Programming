@@ -1,0 +1,77 @@
+/* General styling for containers and boxes */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.position-container {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 20px auto;
+}
+
+.relative-container,
+.absolute-container {
+  width: 45%;
+  padding: 20px;
+  border: 2px solid #333;
+  background-color: #f9f9f9;
+}
+
+/* Styling for boxes */
+.box {
+  width: 80px;
+  height: 80px;
+  background-color: lightblue;
+  color: #333;
+  text-align: center;
+  line-height: 80px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+/* Relative positioning for boxes inside .relative-container */
+.relative-container .box1 {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+.relative-container .box2 {
+  position: relative;
+  top: 20px;
+  left: 40px;
+}
+
+.relative-container .box3 {
+  position: relative;
+  top: 30px;
+  left: 60px;
+}
+
+/* Absolute positioning for boxes inside .absolute-container */
+.absolute-container {
+  position: relative; /* This allows .box elements to position absolutely within this container */
+}
+
+.absolute-container .box1 {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.absolute-container .box2 {
+  position: absolute;
+  top: 50px;
+  left: 80px;
+}
+
+.absolute-container .box3 {
+  position: absolute;
+  top: 90px;
+  left: 140px;
+}
