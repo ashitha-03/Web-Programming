@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .exam-container {
+            width: 500px;
+            background-color:rgba(116, 144, 245, 0.516);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .question input {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-container">
+    <h2>MCQ</h2>
+    <form id="examForm" onsubmit="return checkAnswers(event)">
+        
+        <div class="question">
+          <label>1. Which HTML element is used to display an image?</label><br>
+          <input type="radio" name="q1" value="Image"> Image<br>
+          <input type="radio" name="q1" value="Picture"> Picture<br>
+          <input type="radio" name="q1" value="Image Source"> Image Source<br>
+          <input type="radio" name="q1" value="Graphic"> Graphic<br>
+        </div>
+
+        <div class="question">
+            <label>2. What does CSS stand for?</label><br>
+            <input type="radio" name="q2" value="Computer Style Sheets"> Computer Style Sheets<br>
+            <input type="radio" name="q2" value="Cascading Style Sheets"> Cascading Style Sheets<br>
+            <input type="radio" name="q2" value="Creative Style Sheets"> Creative Style Sheets<br>
+            <input type="radio" name="q2" value="Colorful Style Sheets"> Colorful Style Sheets<br>
+        </div>
+
+        <div class="question">
+            <label>3. Which JavaScript method is used to display an alert box with a message?</label><br>
+            <input type="radio" name="q3" value="alert()"> alert()<br>
+            <input type="radio" name="q3" value="message()"> message()<br>
+            <input type="radio" name="q3" value="showMessage()"> showMessage()<br>
+            <input type="radio" name="q3" value="console.log()"> console.log()<br>
+        </div>
+
+        <div class="question">
+            <label>4. How do you select an element by its ID in JavaScript?</label><br>
+            <input type="radio" name="q4" value="getElementByClass()"> getElementByClass()<br>
+            <input type="radio" name="q4" value="getElementById()"> getElementById()<br>
+            <input type="radio" name="q4" value="querySelector()"> querySelector()<br>
+            <input type="radio" name="q4" value="getElementsByName()"> getElementsByName()<br>
+        </div>
+
+        <div class="question">
+            <label>5. Which HTML attribute is used to specify an image source?</label><br>
+            <input type="radio" name="q5" value="src"> src<br>
+            <input type="radio" name="q5" value="href"> href<br>
+            <input type="radio" name="q5" value="alt"> alt<br>
+            <input type="radio" name="q5" value="image"> image<br>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkAnswers(event) {
+        event.preventDefault();
+
+        const correctAnswers = {
+            q1: "Image",
+            q2: "Cascading Style Sheets",
+            q3: "alert()",
+            q4: "getElementById()",
+            q5: "src"
+        };
+
+        let score = 0;
+        let totalQuestions = 5;
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            let answer = document.querySelector(`input[name="q${i}"]:checked`);
+            if (answer && answer.value === correctAnswers[`q${i}`]) {
+                score++;
+            }
+        }
+
+        let resultText = `You scored ${score} out of ${totalQuestions}`;
+        if (score === totalQuestions) {
+            resultText += " - Excellent!";
+        } else if (score >= totalQuestions / 2) {
+            resultText += " - Good job!";
+        } else {
+            resultText += " - Better luck next time!";
+        }
+
+        document.getElementById('result').innerText = resultText;
+    }
+</script>
+
+</body>
+</html>
